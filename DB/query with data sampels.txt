@@ -1,0 +1,132 @@
+-- Table: customers
+CREATE TABLE `customers` (
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `nic` varchar(15) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `nic` (`nic`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: drivers
+CREATE TABLE `drivers` (
+  `driver_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `nic` varchar(20) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `license_number` varchar(50) NOT NULL,
+  `vehicle_id` int NOT NULL,
+  PRIMARY KEY (`driver_id`),
+  UNIQUE KEY `license_number` (`license_number`),
+  UNIQUE KEY `nic` (`nic`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: users
+CREATE TABLE `users` (
+  `customerId` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `nic` varchar(15) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`customerId`),
+  UNIQUE KEY `nic` (`nic`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: vehicles
+CREATE TABLE `vehicles` (
+  `vehicle_id` int NOT NULL AUTO_INCREMENT,
+  `model` varchar(100) NOT NULL,
+  `plate_number` varchar(20) NOT NULL,
+  `capacity` int NOT NULL,
+  `price_per_km` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`vehicle_id`),
+  UNIQUE KEY `plate_number` (`plate_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: bookings
+CREATE TABLE `bookings` (
+  `booking_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `booking_number` int NOT NULL,
+  `pickup_location` varchar(255) NOT NULL,
+  `destination` varchar(255) NOT NULL,
+  `distance` int NOT NULL,
+  `vehicle_id` int NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `status` enum('Pending','Confirmed','Completed','Cancelled') DEFAULT 'Pending',
+  `driver_id` int DEFAULT '0',
+  `payment_status` varchar(10) DEFAULT 'Pending',
+  PRIMARY KEY (`booking_id`),
+  UNIQUE KEY `booking_number` (`booking_number`),
+  KEY `customer_id` (`customer_id`),
+  KEY `vehicle_id` (`vehicle_id`),
+  CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE,
+  CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`vehicle_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert: customers
+INSERT INTO `customers` (`customer_id`, `name`, `address`, `nic`, `phone`, `email`, `password`, `created_at`) VALUES
+(1, 'John Doe', '123 Main Street, Colombo', '987654321V', '0771234567', 'john@example.com', 'hashedpassword123', '2025-03-02 11:41:19'),
+(2, 'Jane Smith', '456 Lake Road, Kandy', '876543219V', '0712345678', 'jane@example.com', 'hashedpassword456', '2025-03-02 11:41:19'),
+(3, 'David Perera', '78 Beach Road, Galle', '789654123V', '0759876543', 'david@example.com', 'hashedpassword789', '2025-03-02 11:41:19'),
+(4, 'Ayesha Fernando', '89 Temple Lane, Jaffna', '654321987V', '0765432123', 'ayesha@example.com', 'hashedpassword321', '2025-03-02 11:41:19'),
+(5, 'Kevin Silva', '14 Lotus Avenue, Negombo', '321654987V', '0743210987', 'kevin@example.com', 'hashedpassword654', '2025-03-02 11:41:19'),
+(6, 'e', 'er', 'er', 'er', 'nimesh.buddika96@gmail.com', 're', '2025-03-02 12:44:28'),
+(7, 'Rishani', 'ingiriya', '12345', '1234', 'Rishani@gmail.com', 'ddmfj', '2025-03-02 12:49:15');
+
+-- Insert: drivers
+INSERT INTO `drivers` (`driver_id`, `name`, `nic`, `phone`, `license_number`, `vehicle_id`) VALUES
+(2, 'Sunil Perera', '902345678V', '0723456789', 'C2345678', 2),
+(3, 'Amal Silva', '911234567V', '0771234567', 'D3456789', 3),
+(4, 'Nimal Jayawardena', '891234567V', '0752345678', 'E4567890', 4),
+(5, 'Sarath Kumara', '851234567V', '0763456789', 'F5678901', 5),
+(12, 'Kusal', 'Janith', '0112233044', 'FG234234', 6);
+
+-- Insert: users
+INSERT INTO `users` (`customerId`, `name`, `address`, `nic`, `phone`, `email`, `password`, `created_at`) VALUES
+(1, 'Nimesh Buddika', 'No 43, Jositawattaa, Ekala', '962961649v', '0750788387', 'nimesh.buddika96@gmail.com', '123', '2025-03-02 14:34:53'),
+(2, 'Rishani', 'Sisila, Gallagama RD, Ingiriya', '962345439v', '0760566347', 'rishani@gmail.com', '123', '2025-03-02 19:51:22'),
+(4, 'Saman', 'default address', 'default nic', '075075678', 'saman@gmail.com', '123', '2025-03-10 02:14:59'),
+(10, 'John Doe', 'Kandy', '1996232384v', '0112233405', 'johndoe@example.com', 'Test@123', '2025-03-10 04:09:22'),
+(13, 'Sunil', 'Panadura', '965456547v', '0112233045', 'Sunil@gmail.com', 'sunil123', '2025-03-10 16:57:45'),
+(14, 'Kamal', 'kandy', 'kamal', '0112233036', 'kamal@gmail.com', 'kamal123', '2025-03-10 17:02:08'),
+(21, 'Pathum Lakshan', 'Test', '353453', '343553424', 'Pathum@gmail.com', '3543456', '2025-03-12 13:56:13');
+
+-- Insert: vehicles
+INSERT INTO `vehicles` (`vehicle_id`, `model`, `plate_number`, `capacity`, `price_per_km`) VALUES
+(1, 'Sedan', 'ABC-1234', 5, 30.00),
+(2, 'SUV', 'DEF-5678', 6, 50.00),
+(3, 'Van', 'GHI-9101', 8, 70.00),
+(8, 'truck', '6578', 3, 50.00);
+
+-- Insert: bookings
+INSERT INTO `bookings` (`booking_id`, `customer_id`, `booking_number`, `pickup_location`, `destination`, `distance`, `vehicle_id`, `amount`, `status`, `driver_id`, `payment_status`) VALUES
+(1, 1, 687609, 'Ja ela', 'Kandy', 89, 2, 4450.00, 'Cancelled', NULL, NULL),
+(2, 1, 271467, 'ja ela', 'Kandy', 78, 1, 2340.00, 'Completed', 3, 'Paid'),
+(3, 1, 127251, 'jj', 'jj', 90, 1, 2700.00, 'Cancelled', 4, 'Paid'),
+(4, 1, 149247, 'fg', 'gh', 45, 1, 1350.00, 'Completed', NULL, 'Paid'),
+(5, 1, 215185, 'fg', 'gf', 67, 1, 2010.00, 'Cancelled', NULL, 'Pending'),
+(6, 2, 199605, 'ingiriya', 'ja ela', 65, 3, 4550.00, 'Cancelled', NULL, NULL),
+(7, 3, 339225, 'ja ela', 'ragama', 10, 1, 300.00, 'Completed', NULL, NULL),
+(8, 1, 859882, 'gggg', 'ggggg', 78, 1, 3900.00, 'Pending', 4, 'Unpaid'),
+(9, 1, 977830, 'fff', 'ff', 6, 3, 300.00, 'Completed', 2, 'Paid'),
+(10, 1, 604001, 'eeee', 'eee', 45, 1, 2250.00, 'Pending', 0, 'Unpaid'),
+(11, 1, 496942, 'yyy', 'yy', 88, 1, 4400.00, 'Completed', 0, 'Paid'),
+(12, 1, 581974, 'Mathale', 'Colombo', 120, 2, 6000.00, 'Completed', 2, 'Unpaid'),
+(13, 1, 680736, 'Kagalla', 'Kandy', 30, 2, 1500.00, 'Completed', 2, 'Paid'),
+(14, 1, 451935, 'Kaluthara', 'Nittabuwa', 56, 3, 2800.00, 'Completed', 2, 'Paid'),
+(15, 1, 939322, 'Colombo', 'Kandy', 89, 1, 4450.00, 'Pending', 2, 'Unpaid'),
+(18, 1, 265717, 'Kandy', 'gampola', 23, 1, 1150.00, 'Completed', 3, 'Unpaid'),
+(20, 1, 896190, 'Ja ela', 'Mathara', 120, 2, 6000.00, 'Pending', 0, 'Unpaid'),
+(21, 1, 738666, 'Ja ela', 'Mathara', 120, 2, 6000.00, 'Completed', 3, 'Paid'),
+(22, 1, 422809, 'Gall', 'Negombo', 85, 3, 4250.00, 'Completed', 3, 'Paid'),
+(23, 1, 704067, 'test', 'test', 20, 2, 1000.00, 'Completed', 2, 'Paid');

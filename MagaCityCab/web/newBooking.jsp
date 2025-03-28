@@ -6,22 +6,16 @@
 <%@ page import="java.util.List" %>
 
 <%
-    // Get user session
     HttpSession userSession = request.getSession(false);
     User user = (userSession != null) ? (User) userSession.getAttribute("user") : null;
 
     if (user == null) {
-        response.sendRedirect("login.jsp"); 
+        response.sendRedirect("login.jsp");
         return;
     }
 
-    
     List<Vehicle> vehicles = VehicleDAO.getAllVehicles();
-
-    
     int bookingNumber = (int) (Math.random() * 900000) + 100000;
-
-    
     String rideSuccess = request.getParameter("rideSuccess");
     String error = request.getParameter("error");
 %>
@@ -31,10 +25,43 @@
 <head>
     <meta charset="UTF-8">
     <title>New Booking - MagaCityCab</title>
-   
-    
+
+    <!-- ✅ Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            min-height: 100vh;
+            padding-top: 60px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .card {
+            border-radius: 16px;
+        }
+
+        .card-header h4 {
+            margin-bottom: 0;
+        }
+
+        .total-price-display {
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            background-color: #eef0ff;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .alert {
+            font-size: 0.95rem;
+        }
+    </style>
+
+    <!-- ✅ Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- ✅ JS for Price Calculation -->
     <script>
         function calculatePrice() {
             let distance = document.getElementById("distance").value;
@@ -45,7 +72,7 @@
             if (distance && pricePerKm) {
                 let totalPrice = parseFloat(distance) * parseFloat(pricePerKm);
                 document.getElementById("totalPrice").innerText = "LKR " + totalPrice.toFixed(2);
-                document.getElementById("totalAmount").value = totalPrice.toFixed(2); // Store total in hidden input
+                document.getElementById("totalAmount").value = totalPrice.toFixed(2);
             } else {
                 document.getElementById("totalPrice").innerText = "LKR 0.00";
                 document.getElementById("totalAmount").value = "0.00";
@@ -53,33 +80,31 @@
         }
     </script>
 </head>
-<body class="bg-light">
+<body>
 
     <!-- ✅ Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3">
-        <div class="container">
-            <span class="navbar-brand">Welcome, <%= user.getName() %>!</span>
-            <a href="LogoutServlet" class="btn btn-danger">Logout</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3 fixed-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="navbar-brand">👋 Welcome, <%= user.getName() %>!</span>
+            <a href="LogoutServlet" class="btn btn-light">Logout</a>
         </div>
     </nav>
 
-    <div class="container mt-5">
+    <!-- ✅ Booking Form -->
+    <div class="container mt-5 pt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-7 col-lg-6">
 
-                
                 <div class="card shadow-lg">
                     <div class="card-header bg-primary text-white text-center">
                         <h4>🚖 Book a Ride</h4>
                     </div>
                     <div class="card-body">
-                    
-                        
+
                         <% if ("true".equals(rideSuccess)) { %>
                             <div class="alert alert-success text-center">🎉 Booking Successful!</div>
                         <% } %>
 
-                        
                         <% if ("true".equals(error)) { %>
                             <div class="alert alert-danger text-center">⚠️ Booking Failed. Try Again.</div>
                         <% } %>
@@ -131,11 +156,12 @@
                                 </select>
                             </div>
 
-                            <!-- Hidden field for total amount -->
+                            <!-- Hidden field for price -->
                             <input type="hidden" id="totalAmount" name="totalAmount" value="0.00">
 
-                            <div class="mb-3 text-center">
-                                <h5>Total Price: <span id="totalPrice" class="text-primary fw-bold">LKR 0.00</span></h5>
+                            <div class="mb-4 text-center">
+                                <h5>Total Price:</h5>
+                                <span id="totalPrice" class="total-price-display text-primary fw-bold">LKR 0.00</span>
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100">Submit Booking</button>

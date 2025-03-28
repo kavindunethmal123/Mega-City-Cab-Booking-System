@@ -5,16 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help - MagaCityCab</title>
 
-    <!-- ✅ Bootstrap for Styling -->
-    
+    <!-- ✅ Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #8f94fb, #4e54c8);
+            font-family: "Segoe UI", sans-serif;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background-color: #4e54c8;
+            padding: 1rem;
+        }
+
+        .help-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+        }
+
+        .step-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-icon {
+            background-color: #4e54c8;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .step-text {
+            font-size: 1rem;
+        }
+
+        .btn-back {
+            margin-top: 2rem;
+        }
+
+        h2 {
+            color: #4e54c8;
+            margin-bottom: 1.5rem;
+        }
+    </style>
 </head>
 <body>
 
     <!-- ✅ Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <span class="navbar-brand">MagaCityCab Help Center</span>
-            <a href="userDashboard.jsp" class="btn btn-danger">Back to Dashboard</a>
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="navbar-brand fw-bold">📘 MagaCityCab Help Center</span>
+            <a href="userDashboard.jsp" class="btn btn-light">Back to Dashboard</a>
         </div>
     </nav>
 
@@ -22,33 +75,29 @@
     <div class="container">
         <div class="help-container">
             <h2>❓ How to Use MagaCityCab</h2>
-            <p>Follow these simple steps to book your ride with ease.</p>
+            <p class="mb-4">Follow these simple steps to book your ride with ease.</p>
 
-            <!-- ✅ Step 1 -->
+            <!-- Help Steps -->
             <div class="step-container">
                 <div class="step-icon">1</div>
                 <div class="step-text">Go to the <strong>User Dashboard</strong> to manage your bookings.</div>
             </div>
 
-            <!-- ✅ Step 2 -->
             <div class="step-container">
                 <div class="step-icon">2</div>
                 <div class="step-text">Click <strong>"Book a Ride"</strong> to schedule a new trip.</div>
             </div>
 
-            <!-- ✅ Step 3 -->
             <div class="step-container">
                 <div class="step-icon">3</div>
                 <div class="step-text">Check <strong>"Booking History"</strong> to view past rides.</div>
             </div>
 
-            <!-- ✅ Step 4 -->
             <div class="step-container">
                 <div class="step-icon">4</div>
                 <div class="step-text">Visit <strong>"Payments"</strong> to complete pending payments.</div>
             </div>
 
-            <!-- ✅ Step 5 -->
             <div class="step-container">
                 <div class="step-icon">5</div>
                 <div class="step-text">Need help? Contact our <strong>Support Team</strong> anytime.</div>
@@ -60,7 +109,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS (Optional) -->
+    <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

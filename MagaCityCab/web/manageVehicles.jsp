@@ -16,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Manage Vehicles - MagaCityCab</title>
-   
+    <link rel="stylesheet" type="text/css" href="css/adminStyles.css">
 </head>
 <body>
 

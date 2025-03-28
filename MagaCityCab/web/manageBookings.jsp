@@ -60,7 +60,7 @@
             <h2>📑 Manage Bookings</h2>
 
             <!-- Booking Status Filter -->
-            <form method="GET" action="manageBookings.jsp">
+            <form method="GET" action="manageBookings.jsp" class="filter-bar">
                 <label for="statusFilter">Filter by Status:</label>
                 <select name="status" id="statusFilter" onchange="this.form.submit()">
                     <option value="All" <%= selectedStatus.equals("All") ? "selected" : "" %>>All</option>

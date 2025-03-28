@@ -1,0 +1,350 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* Reset & Base */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f8;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #4e54c8;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.navbar-right span {
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+.logout-btn {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 6px 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #d93636;
+}
+
+/* Container */
+.admin-container {
+    display: flex;
+    height: calc(100vh - 72px); /* Subtract navbar height */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: #2f327d;
+    color: white;
+    padding-top: 2rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 1rem;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    display: block;
+    transition: background 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #4448a4;
+    border-left: 4px solid #ffdf6c;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    margin: 1.5rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.content h2 {
+    color: #4e54c8;
+    margin-bottom: 1rem;
+}
+
+/* Booking Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4e54c8;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+select, input[type="text"] {
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #4e54c8;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+button:hover {
+    background-color: #3a3eb2;
+}
+
+
+.filter-bar {
+    margin-bottom: 1rem;
+}
+
+
+/* Modal Overlay */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+/* Close Button */
+.modal-content .close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #555;
+}
+
+/* Form Styling */
+.modal-content input {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.modal-content label {
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.modal-content button {
+    padding: 10px 18px;
+    border: none;
+    background-color: #4e54c8;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modal-content button:hover {
+    background-color: #3d41b4;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4e54c8;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Search & Action Buttons */
+form input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+form button {
+    background-color: #4e54c8;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #3d41b4;
+}
+
+
+/*driver*/
+
+/* === Driver Dashboard Styles === */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #8f94fb, #4e54c8);
+    margin: 0;
+    padding-top: 70px;
+    color: #333;
+}
+
+.navbar {
+    background-color: #4e54c8;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background: #ff4d4d;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #4e54c8;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.ride-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.ride-table th,
+.ride-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.ride-table th {
+    background-color: #4e54c8;
+    color: white;
+}
+
+.status-completed {
+    color: green;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-cancelled {
+    color: red;
+    font-weight: bold;
+}
+
+.text-muted {
+    font-style: italic;
+    color: #777;
+}
